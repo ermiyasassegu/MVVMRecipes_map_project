@@ -28,27 +28,27 @@ fun CategoryScreen(
     viewModel: CategoryViewModel = hiltViewModel()
 
 ) {
+    val listOfCategories by remember { viewModel.listOfCategories }
 
-    val listOfCategories by remember {
-        viewModel.listOfCategories }
     LazyColumn {
         items(listOfCategories) { item ->
-            SingleCategoryItem( item)
+            SingleCategoryItem(item)
 
         }
     }
 }
+
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun SingleCategoryItem(
     category: Category,
-    //onCategoryClick: (String) -> Unit
+   // onCategoryClick: (String) -> Unit
 ) {
     Card(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
-            .clickable {  },           // handling onCategoryClick
+            .clickable { },           // handling onCategoryClick
         elevation = 8.dp,
     ) {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
