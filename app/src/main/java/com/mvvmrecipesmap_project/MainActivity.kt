@@ -34,20 +34,22 @@ fun RecipesApp() {
      * composables- Recipes screen
      */
 
- /*   val navController = rememberNavController()
+    val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "category"){
 
         composable("category"){
-            navController.navigate("recipes")
-            CategoryScreen()
+
+            CategoryScreen{
+                navController.navigate("recipes")
+            }
         }
         composable("recipes"){
             RecipesScreen()
         }
-    }*/
+    }
 
-    CategoryScreen()
+   // CategoryScreen()
 
     //RecipesScreen
 }

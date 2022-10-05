@@ -25,14 +25,17 @@ import com.mvvmrecipesmap_project.category.viewmodel.CategoryViewModel
 
 @Composable
 fun CategoryScreen(
-    viewModel: CategoryViewModel = hiltViewModel()
+    viewModel: CategoryViewModel = hiltViewModel(),
+    onItemClick : () -> Unit
 
 ) {
     val listOfCategories by remember { viewModel.listOfCategories }
 
     LazyColumn {
         items(listOfCategories) { item ->
-            SingleCategoryItem(item)
+            SingleCategoryItem(item){
+                onItemClick()
+            }
 
         }
     }
@@ -42,13 +45,13 @@ fun CategoryScreen(
 @Composable
 fun SingleCategoryItem(
     category: Category,
-   // onCategoryClick: (String) -> Unit
+    onClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
-            .clickable { },           // handling onCategoryClick
+            .clickable { onClick()},           // handling onCategoryClick
         elevation = 8.dp,
     ) {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
