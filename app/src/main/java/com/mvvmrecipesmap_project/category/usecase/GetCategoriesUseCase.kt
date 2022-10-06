@@ -4,7 +4,7 @@ import com.mvvmrecipesmap_project.category.model.CategoryResponse
 import com.mvvmrecipesmap_project.category.repository.ICategoryRepository
 import javax.inject.Inject
 
-interface IgetCategoriesUseCase {
+interface IGetCategoriesUseCase {
 
     suspend operator fun invoke() : CategoryResponse
 
@@ -12,7 +12,7 @@ interface IgetCategoriesUseCase {
 
 class GetCategoriesUseCase @Inject constructor(
     val repo: ICategoryRepository
-): IgetCategoriesUseCase {
+): IGetCategoriesUseCase {
     override suspend fun invoke(): CategoryResponse {
         return repo.getAllCategories()
     }

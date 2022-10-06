@@ -1,12 +1,14 @@
 package com.mvvmrecipesmap_project
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.mvvmrecipesmap_project.category.CategoryScreen
 import com.mvvmrecipesmap_project.recipes.RecipesScreen
 import com.mvvmrecipesmap_project.ui.theme.MVVMRecipesMap_projectTheme
@@ -28,11 +30,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun RecipesApp() {
     //TODO
-    /**
-     * split this NavHost
-     * composable -cs
-     * composables- Recipes screen
-     */
 
     val navController = rememberNavController()
 
@@ -40,16 +37,22 @@ fun RecipesApp() {
 
         composable("category"){
 
-            CategoryScreen{
-                navController.navigate("recipes")
+            CategoryScreen { category ->
+                navController.navigate("recipes/${category}")
             }
         }
-        composable("recipes"){
-            RecipesScreen()
+
+        composable("recipes/{category}", arguments = listOf(navArgument("category"){
+            type = NavType.StringType
+        })){
+
+            //TODO
+            val categoryStr = remember {
+                it.arguments?.getString("category")
+            }
+            RecipesScreen(category = categoryStr)
         }
+
     }
 
-   // CategoryScreen()
-
-    //RecipesScreen
 }
