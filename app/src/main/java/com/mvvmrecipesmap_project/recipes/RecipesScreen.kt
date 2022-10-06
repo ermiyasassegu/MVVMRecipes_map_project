@@ -1,5 +1,7 @@
 package com.mvvmrecipesmap_project.recipes
 
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -7,6 +9,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mvvmrecipesmap_project.category.SingleItem
+import com.mvvmrecipesmap_project.recipes.model.Meal
 import com.mvvmrecipesmap_project.recipes.viewmodel.RecipesViewModel
 import com.mvvmrecipesmap_project.recipes.viewmodel.ViewState
 
@@ -29,7 +33,7 @@ fun RecipesScreen(
 
     when(val state = viewState){
         is ViewState.Success -> {
-            Text (text=" Success ${state.data}")
+            RecipesList (state.data)
         }
         is ViewState.Error -> {
             Text (text=" Error ${state.errorMessage}")
@@ -38,7 +42,15 @@ fun RecipesScreen(
             Text(text = "Loading")
         }
     }
-
-
-    Text (text=" the category is $category")
 }
+
+@Composable
+fun RecipesList(meals: List<Meal>) {
+
+    LazyColumn {
+        items(meals) { item ->
+            SingleItem( Title= item.strMeal, thumbnail = item.strMealThumb, onClick ={} )
+        }
+    }
+}
+

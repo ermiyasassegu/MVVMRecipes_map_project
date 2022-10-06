@@ -29,11 +29,11 @@ fun CategoryScreen(
     onItemClick: (String) -> Unit
 ) {
 
-    val listOfCategories by remember {
-        viewModel.listOfCategories }
+    val listOfCategories by remember {viewModel.listOfCategories }
+
     LazyColumn {
         items(listOfCategories) { item ->
-            SingleCategoryItem( item){
+            SingleItem( item.strCategory, item.strCategoryThumb){
                 onItemClick(it)
             }
 
@@ -42,24 +42,25 @@ fun CategoryScreen(
 }
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun SingleCategoryItem(
-    category: Category,
+fun SingleItem(
+    Title: String,
+    thumbnail: String,
     onClick: (String) -> Unit
 ) {
     Card(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
-            .clickable { onClick(category.strCategory) },           // handling onCategoryClick
+            .clickable { onClick(Title) },           // handling onCategoryClick
         elevation = 8.dp,
     ) {
         Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Image(
                 modifier = Modifier.size(80.dp), painter = rememberImagePainter(
-                    category.strCategoryThumb
+                    thumbnail
                 ), contentDescription = null
             )
-            Text(text = category.strCategory, fontSize = 24.sp)
+            Text(text = Title, fontSize = 24.sp)
         }
     }
 
