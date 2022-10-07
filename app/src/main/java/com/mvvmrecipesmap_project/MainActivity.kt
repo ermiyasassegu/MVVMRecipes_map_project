@@ -18,11 +18,12 @@ import androidx.navigation.compose.*
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.mvvmrecipesmap_project.category.CategoryScreen
 import com.mvvmrecipesmap_project.recipes.RecipesScreen
 import com.mvvmrecipesmap_project.navigation.screen.BottomNavigationScreens
 import com.mvvmrecipesmap_project.navigation.screen.FavouritesTab
-import com.mvvmrecipesmap_project.map.LocationTab
+import com.mvvmrecipesmap_project.map.ui.LocationTab
 import com.mvvmrecipesmap_project.scanner.ScanTab
 import com.mvvmrecipesmap_project.ui.theme.MVVMRecipesMap_projectTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -125,7 +126,7 @@ fun MainScreenNavigationConfigurations(
             FavouritesTab()
         }
         composable(BottomNavigationScreens.Location.route) {
-            LocationTab()
+            LocationTab( )
         }
         composable(BottomNavigationScreens.Scan.route) {
             ScanTab()
