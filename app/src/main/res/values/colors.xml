@@ -7,4 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="gradient_purple">#4527a0</color>
+    <color name="gradient_purple_mid">#512da8</color>
+    <color name="gradient_pink">#643CAA</color>
+
+    <color name="text_color_pink">#E7CDEC</color>
+    <color name="background_dark">#131F33</color>
+    <color name="background_light">#323A4C</color>
+    <color name="bottom_bar_color">#030C1F</color>
+    <color name="progress_color">#F6A625</color>
+    <color name="icon_highlight">#64C7A1</color>
+    <color name="icon_color">#C3C6D1</color>
+    <color name="book_detail_background_color">#EAC58F</color>
+    <color name="action_button_background_color">#272420</color>
+    <color name="action_button_backgrounsdsdd_color">#CA3F5A</color>
 </resources>
