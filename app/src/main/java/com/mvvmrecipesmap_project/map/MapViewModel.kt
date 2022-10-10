@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.LatLng
         private var _locationPermissionGranted = MutableLiveData(false)
         var locationPermissionGranted : LiveData<Boolean> = _locationPermissionGranted
 
-        fun currentUserGeoCOord(latLng: LatLng){
+        fun currentUserGeoCoord(latLng: LatLng){
             _userCurrentLat.value = latLng.latitude
             _userCurrentLng.value = latLng.longitude
         }

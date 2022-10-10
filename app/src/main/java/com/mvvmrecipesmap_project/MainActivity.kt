@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.mvvmrecipesmap_project.category.CategoryScreen
+import com.mvvmrecipesmap_project.map.MapScreen
 import com.mvvmrecipesmap_project.recipes.RecipesScreen
 import com.mvvmrecipesmap_project.navigation.screen.BottomNavigationScreens
 import com.mvvmrecipesmap_project.navigation.screen.FavouritesTab
@@ -126,7 +127,7 @@ fun MainScreenNavigationConfigurations(
             FavouritesTab()
         }
         composable(BottomNavigationScreens.Location.route) {
-            LocationTab( )
+            MapScreen( )
         }
         composable(BottomNavigationScreens.Scan.route) {
             ScanTab()
