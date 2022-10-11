@@ -69,6 +69,13 @@ dependencies {
     // ViewModel Compose
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
 
+    //Accompanist
+    //Pager
+    implementation "com.google.accompanist:accompanist-pager:$accompanist_version"
+    //System UI controller
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-insets:$accompanist_version"
+
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.40.5"
     kapt "com.google.dagger:hilt-android-compiler:2.40.5"
@@ -82,6 +89,11 @@ dependencies {
 
     //Retrofit
     implementation 'com.squareup.retrofit2:converter-scalars:2.8.1'
+    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.2"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
+
+    //Coil
+    implementation "io.coil-kt:coil-compose:2.1.0"
 
     implementation "io.coil-kt:coil-compose:1.4.0"
 
