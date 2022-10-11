@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">MVVMRecipesMap_project</string>
     <string name="map">Map</string>
-    <string name="category">Recipes</string>
-    <string name="favourites">Favourite</string>
+    <string name="home">Home</string>
     <string name="scan">Scanner</string>
     <string name="location">Map</string>
 </resources>

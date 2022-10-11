@@ -12,6 +12,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
+import com.mvvmrecipesmap_project.presentation.navigation.MainScreen
 import com.mvvmrecipesmap_project.presentation.navigation.Navigation
 import com.mvvmrecipesmap_project.ui.theme.MVVMRecipesMap_projectTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
             MVVMRecipesMap_projectTheme {
                 //RecipesApp()
                 WindowCompat.setDecorFitsSystemWindows(window, false)
-                Navigation()
+                MainScreen()
                 LockScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
             }
