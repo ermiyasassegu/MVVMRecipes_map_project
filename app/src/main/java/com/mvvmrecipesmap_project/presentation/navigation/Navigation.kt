@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -68,7 +69,7 @@ fun MainScreen() {
         "Home" ->{
             bottomBarState.value = true
         }
-        "SPLASH_ROUTE" ->{
+        "location" ->{
             bottomBarState.value = false
         }
 
@@ -191,7 +192,7 @@ private fun MainScreenNavigationConfigurations(
         }
 
         composable(BottomNavigationScreens.Location.route) {
-
+                val viewmodel :PermissionViewModel = hiltViewModel()
                 MapScreen(
                      locationRequestOnClick = {} )
 
