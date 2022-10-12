@@ -63,20 +63,13 @@ object RemoteModule {
         return Cache(context.cacheDir, cacheSize.toLong())
     }
 
-    @Provides
-    @Singleton
-    fun providesGson(): Gson {
-        return GsonBuilder().setLenient().create()
-    }
 
     @Provides
-    @Singleton
     fun providesGsonConverterFactory(gson: Gson): GsonConverterFactory {
         return GsonConverterFactory.create(gson)
     }
 
     @Provides
-    @Singleton
     fun providesAppCallAdapterFactory(): AppCallAdapterFactory {
         return AppCallAdapterFactory()
     }

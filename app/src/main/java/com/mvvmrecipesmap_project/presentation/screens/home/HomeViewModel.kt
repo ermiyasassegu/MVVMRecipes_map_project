@@ -36,6 +36,7 @@ class HomeViewModel @Inject constructor(
         when(events) {
             is HomeScreenEvents.OnSearchInputKeyed -> {
                 //Todo -> implement Search
+                fetchMealCategories()
             }
             is HomeScreenEvents.OnCategorySelected -> {
                 filterMealsByCategory(events.category)

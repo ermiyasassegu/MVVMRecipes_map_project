@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -21,6 +22,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.mvvmrecipesmap_project.R
+import com.mvvmrecipesmap_project.map.screens.home.view.MapScreen
+import com.mvvmrecipesmap_project.map.screens.permission.screen.LocationPermissionScreen
+import com.mvvmrecipesmap_project.map.screens.permission.viewmodel.PermissionViewModel
 import com.mvvmrecipesmap_project.map.ui.LocationTab
 import com.mvvmrecipesmap_project.navigation.screen.BottomNavigationScreens
 import com.mvvmrecipesmap_project.presentation.screens.home.HomeScreen
@@ -63,6 +67,9 @@ fun MainScreen() {
     when(navBackStackEntry?.destination?.route){
         "Home" ->{
             bottomBarState.value = true
+        }
+        "location" ->{
+            bottomBarState.value = false
         }
     }
     Scaffold(
@@ -175,13 +182,18 @@ fun currentRoute(navController: NavHostController): String? {
 private fun MainScreenNavigationConfigurations(
     navController: NavHostController
 ) {
+
+
     NavHost(navController, startDestination = BottomNavigationScreens.Home.route) {
         composable(BottomNavigationScreens.Home.route) {
             Navigation()
         }
 
         composable(BottomNavigationScreens.Location.route) {
-            LocationTab()
+
+                MapScreen(
+                     locationRequestOnClick = {} )
+
         }
         composable(BottomNavigationScreens.Scan.route) {
             ScanTab()

@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val getPlaces: GetPlaces) :
+class MapViewModel @Inject constructor(private val getPlaces: GetPlaces) :
     ViewModel() {
 
     var venuesListState by mutableStateOf(VenuesListState())

@@ -1,6 +1,5 @@
 package com.mvvmrecipesmap_project.di
 
-
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,7 +9,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.mvvmrecipesmap_project.data.remote.MealApi
@@ -20,16 +18,14 @@ import com.mvvmrecipesmap_project.util.Constants
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object RecipesModule {
 
     @Provides
-    @Singleton
     fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
     @Provides
-    @Singleton
     fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(60L, TimeUnit.SECONDS)
@@ -38,12 +34,8 @@ object AppModule {
             .build()
     }
 
-    @Provides
-    @Singleton
-    fun providesGson(): Gson = GsonBuilder().create()
 
     @Provides
-    @Singleton
     fun providesRetrofitInstance(
         gson: Gson,
         okHttpClient: OkHttpClient
@@ -57,7 +49,6 @@ object AppModule {
     }
 
     @Provides
-    @Singleton
     fun providesMealRepository(mealApi: MealApi): MealsRepository {
         return MealRepositoryImpl(mealApi)
     }
