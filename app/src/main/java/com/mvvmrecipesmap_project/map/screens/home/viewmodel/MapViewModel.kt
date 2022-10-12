@@ -89,15 +89,15 @@ class MapViewModel @Inject constructor(private val getPlaces: GetPlaces) :
     }
 
     /**
-     * Get dummy data for Adyen Amsterdam location
+     * Get dummy data for Karamalmi Espoo location
      * return LatLng
      */
-    fun getDummyAmsterdamLocation(): LatLng {
+    fun getDummyEspooLocation(): LatLng {
         return LatLng(Constant.DUMMY_LOCATION_LAT, Constant.DUMMY_LOCATION_LON)
     }
 
     /**
-     * Get dummy data for Adyen Amsterdam location
+     * Get dummy data for Karamalmi Espoo location
      * return LocationRequestModel
      */
     fun getDummyLocationRequest(): LocationRequestModel {

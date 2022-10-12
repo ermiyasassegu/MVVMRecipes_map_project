@@ -6,11 +6,11 @@ import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.*
+import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.runtime.*
-import androidx.compose.runtime.R
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +26,8 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.mvvmrecipesmap_project.map.screens.home.viewmodel.MapViewModel
 import com.mvvmrecipesmap_project.map.util.Constant.GOOGLE_MAPS_CAMERA_ZOOM
+import com.mvvmrecipesmap_project.R
+import com.mvvmrecipesmap_project.map.model.response.Result
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.mvvmrecipesmap_project.domain.models.Category
@@ -47,7 +49,7 @@ fun MapScreen(
     LaunchedEffect(Unit) {
         mapViewModel.getPlaces(mapViewModel.getDummyLocationRequest())
         cameraPositionState.position = CameraPosition.fromLatLngZoom(
-            mapViewModel.getDummyAmsterdamLocation(),
+            mapViewModel.getDummyEspooLocation(),
             GOOGLE_MAPS_CAMERA_ZOOM
         )
     }
@@ -76,6 +78,92 @@ fun MapScreen(
                 }
             }
         }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = dimensionResource(id = R.dimen.home_screen_show_my_current_location_box_padding)),
+            contentAlignment = Alignment.BottomStart
+        ){
+            Button( modifier = Modifier
+                .wrapContentSize(),
+                onClick = { 
+                    showProgress.value = true
+                    locationRequestOnClick()
+                }) {
+                Icon(
+                    Icons.Default.Place,
+                    contentDescription = stringResource(id = R.string.home_screen_show_my_current_location_button_content_description )
+                )
+                Text(text = stringResource(id = R.string.home_screen_show_my_current_location_button_text))
+            }
+            
+        }
     }
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        if (venuesListState.isLoading){
+            CircularProgressIndicator()
+        }else if (venuesListState.error != null){
+            Text(
+                text = venuesListState.error,
+                color = MaterialTheme.colors.error
+            )
+        }
+    }
+
+    if(currentLocation.value != null){
+        mapViewModel.getPlaces(currentLocation.value!!)
+        cameraPositionState.position = CameraPosition.fromLatLngZoom(
+            mapViewModel.getUserCurrentLocation(),
+            GOOGLE_MAPS_CAMERA_ZOOM
+        )
+        showProgress.value = false
+        mapViewModel.setCurrentLocationEmpty()
+    }
+
+    if(showProgress.value){
+        Box (
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+                ){
+            CircularProgressIndicator()
+
+        }
+    }
+
+    if (selectedPlaceState.value != null){
+        val place = selectedPlaceState.value
+        place?.let {
+            showInfo.value = true
+            SelectedPlaceInfo(showInfo, place)
+        }
+    }
+}
+
+@Composable
+fun SelectedPlaceInfo(showInfo: MutableState<Boolean>, place: Result) {
+    if(showInfo.value){
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Card(
+                backgroundColor = MaterialTheme.colors.primary,
+                modifier = Modifier.padding(
+                    vertical = dimensionResource(id = R.dimen.place_info_card_vertical_padding),
+                    horizontal = dimensionResource(id = R.dimen.place_info_card_horizontal_padding)
+                )
+            ) {
+                var expanded by remember { mutableStateOf(false)}
+            }
+
+
+
+        }
+    }
+
 }
 

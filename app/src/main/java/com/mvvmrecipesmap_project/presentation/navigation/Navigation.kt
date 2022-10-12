@@ -68,9 +68,10 @@ fun MainScreen() {
         "Home" ->{
             bottomBarState.value = true
         }
-        "location" ->{
+        "SPLASH_ROUTE" ->{
             bottomBarState.value = false
         }
+
     }
     Scaffold(
         bottomBar = {
