@@ -12,6 +12,8 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.mvvmrecipesmap_project.presentation.navigation.MainScreen
 import com.mvvmrecipesmap_project.presentation.navigation.Navigation
 import com.mvvmrecipesmap_project.ui.theme.MVVMRecipesMap_projectTheme
@@ -54,13 +56,13 @@ fun Context.findActivity(): Activity? = when (this) {
     else -> null
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun DefaultPreview(navController: NavController) {
     MVVMRecipesMap_projectTheme {
-        Navigation()
+        Navigation(navController )
     }
-}
+}*/
 
 /*@Composable
 fun MainScreen() {

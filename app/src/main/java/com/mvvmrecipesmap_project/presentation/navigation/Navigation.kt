@@ -1,10 +1,13 @@
 package com.mvvmrecipesmap_project.presentation.navigation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -29,33 +32,66 @@ import com.mvvmrecipesmap_project.util.Constants.ARGS_CATEGORY
 import com.mvvmrecipesmap_project.util.Constants.ARGS_MEAL_ID
 
 @Composable
-fun MainScreen() {
+fun barControl() {
+    // State of bottomBar, set state to false, if current page route is "car_details"
+    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
+
     val navController = rememberNavController()
+    // Subscribe to navBackStackEntry, required to get current route
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+
+    when(navBackStackEntry?.destination?.route){
+        "splashScreen" ->{
+            bottomBarState.value = false
+        }
+    }
+}
+@Composable
+fun MainScreen() {
+
+    val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
     val bottomNavigationItems = listOf(
         BottomNavigationScreens.Home,
         BottomNavigationScreens.Location,
         BottomNavigationScreens.Scan
     )
-    Scaffold(
+    // State of bottomBar, set state to false, if current page route is "car_details"
+    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
 
+
+    when(navBackStackEntry?.destination?.route){
+        "Home" ->{
+            bottomBarState.value = true
+        }
+    }
+    Scaffold(
         bottomBar = {
-            RecipesBottomNavigation(navController, bottomNavigationItems)
+            RecipesBottomNavigation(navController, bottomBarState, bottomNavigationItems )
         }
     ) {
         MainScreenNavigationConfigurations(navController)
 
     }
+    
 }
+
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
     val systemUiController = rememberSystemUiController()
+    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
 
     NavHost(navController = navController, startDestination = Screens.SplashScreen.route) {
         composable(Screens.SplashScreen.route) {
+
+                bottomBarState.value = false
+
             SplashScreen(navController, systemUiController)
+
         }
         composable(Screens.HomeScreen.route) {
+            bottomBarState.value = true
             HomeScreen(navController, systemUiController)
         }
         composable(
@@ -86,40 +122,55 @@ fun Navigation() {
 @Composable
 fun RecipesBottomNavigation(
     navController: NavHostController,
+    bottomBarState: MutableState<Boolean>,
     items: List<BottomNavigationScreens>) {
 
-    BottomNavigation (
-        modifier = Modifier.fillMaxWidth(1f).padding(30.dp),
+    AnimatedVisibility(
+        visible = bottomBarState.value,
+        enter = slideInVertically(initialOffsetY = { it }),
+        exit = slideOutVertically(targetOffsetY = { it }),
+        content = {
+            BottomNavigation(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(40.dp),
 
-        elevation = 20.dp
-    ){
-        val currentRoute = currentRoute(navController)
-        items.forEach { screen ->
-            BottomNavigationItem(
-                icon = { Icon(screen.icon, null) },
-                label = { Text(stringResource(id = screen.resourceId)) },
-                selected = currentRoute == screen.route,
-                alwaysShowLabel = false,
-                onClick = {
-                    if(currentRoute != screen.route) {
-                        navController.navigate(screen.route)
-                    }
-                },
-                modifier = Modifier.background(color = colorResource(id = R.color.bottom_bar_color)),
-                selectedContentColor = colorResource(id = R.color.icon_highlight),
-                unselectedContentColor = colorResource(id = R.color.icon_color)
-            )
-        }
-    }
+
+            ) {
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
+                //val currentRoute = currentRoute(navController)
+                items.forEach { screen ->
+                    BottomNavigationItem(
+                        icon = { Icon(screen.icon, null) },
+                        label = { Text(stringResource(id = screen.resourceId)) },
+                        selected = currentRoute == screen.route,
+                        alwaysShowLabel = false,
+                        onClick = {
+                            navController.popBackStack(
+                                navController.graph.startDestinationId, inclusive = false
+                            )
+
+                            if (currentRoute != screen.route) {
+                                navController.navigate(screen.route)
+                            }
+                        },
+                        modifier = Modifier.background(color = colorResource(id = R.color.bottom_bar_color)),
+                        selectedContentColor = colorResource(id = R.color.icon_highlight),
+                        unselectedContentColor = colorResource(id = R.color.icon_color)
+                    )
+                }
+            }
+        })
 }
 
 
 
-@Composable
+/*@Composable
 fun currentRoute(navController: NavHostController): String? {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     return navBackStackEntry?.destination?.route
-}
+}*/
 @Composable
 private fun MainScreenNavigationConfigurations(
     navController: NavHostController
