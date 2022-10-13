@@ -176,7 +176,7 @@ fun SelectedPlaceInfo(showInfo: MutableState<Boolean>, place: Result) {
                             Row(Modifier.weight(1F)) {
                                 IconButton(onClick = { expanded = !expanded }) {
                                     Icon(
-                                        imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+                                        imageVector = if (expanded) Icons.Filled.Face else Icons.Filled.LocationOn,
                                         contentDescription = stringResource(id = R.string.home_screen_place_detail_expand_content_description)
                                     )
                                 }
@@ -203,7 +203,7 @@ fun SelectedPlaceInfo(showInfo: MutableState<Boolean>, place: Result) {
 fun SelectedPlaceNameField(name: String?) {
     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.place_info_spacer)))
     Icon(
-        Icons.Default.Business,
+        Icons.Default.Star,
         contentDescription = stringResource(id = R.string.home_screen_place_detail_name_content_description)
     )
     Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.place_info_spacer)))
@@ -230,7 +230,7 @@ fun SelectedPlaceCategoriesField(categoryList: List<Category>?) {
     Column {
         Row(modifier = Modifier.fillMaxWidth()) {
             Icon(
-                Icons.Filled.Storefront,
+                Icons.Filled.Menu,
                 contentDescription = stringResource(id = R.string.home_screen_place_detail_categories_content_description)
             )
             Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.place_info_spacer)))
