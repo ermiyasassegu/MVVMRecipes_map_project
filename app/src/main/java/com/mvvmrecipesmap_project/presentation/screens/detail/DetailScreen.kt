@@ -124,7 +124,7 @@ fun DetailScreen(
                          }
 
                         item {
-                            Spacer(modifier = Modifier.height(20.dp))
+                            Spacer(modifier = Modifier.height(5.dp))
 
                             Button(
                                 elevation = ButtonDefaults.elevation(defaultElevation = 0.dp),
@@ -150,6 +150,7 @@ fun DetailScreen(
                                     color = White
                                 )
                             }
+                            Spacer(modifier = Modifier.height(30.dp))
                         }
                     })
             }

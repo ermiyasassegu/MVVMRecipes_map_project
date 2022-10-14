@@ -14,9 +14,15 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -43,6 +49,7 @@ import com.mvvmrecipesmap_project.scanner.ScanTab
 import com.mvvmrecipesmap_project.util.Constants.ARGS_CATEGORY
 import com.mvvmrecipesmap_project.util.Constants.ARGS_MEAL_ID
 import timber.log.Timber
+import kotlin.math.roundToInt
 
 
 @Composable
@@ -57,8 +64,22 @@ fun MainScreen() {
     )
     // State of bottomBar, set state to false, if current page route is "car_details"
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
+    val bottomBarHeight = 48.dp
+    val bottomBarHeightPx = with(LocalDensity.current) { bottomBarHeight.roundToPx().toFloat() }
+    val bottomBarOffsetHeightPx = remember { mutableStateOf(0f) }
 
+    val nestedScrollConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
 
+                val delta = available.y
+                val newOffset = bottomBarOffsetHeightPx.value + delta
+                bottomBarOffsetHeightPx.value = newOffset.coerceIn(-bottomBarHeightPx, 0f)
+
+                return Offset.Zero
+            }
+        }
+    }
     when(navBackStackEntry?.destination?.route){
         "Home" ->{
             bottomBarState.value = true
@@ -66,10 +87,12 @@ fun MainScreen() {
         "location" ->{
             bottomBarState.value = true
         }
-
     }
+
     Scaffold(
+        Modifier.nestedScroll(nestedScrollConnection),
         bottomBar = {
+
             RecipesBottomNavigation(navController, bottomBarState, bottomNavigationItems )
         }
     ) {
@@ -136,8 +159,7 @@ fun RecipesBottomNavigation(
             BottomNavigation(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(40.dp),
-
+                    .padding(40.dp)
 
             ) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -168,26 +190,6 @@ fun RecipesBottomNavigation(
 }
 
 
-/*@Composable
-fun barControl() {
-    // State of bottomBar, set state to false, if current page route is "car_details"
-    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-
-    val navController = rememberNavController()
-    // Subscribe to navBackStackEntry, required to get current route
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-
-    when(navBackStackEntry?.destination?.route){
-        "splashScreen" ->{
-            bottomBarState.value = false
-        }
-    }
-}*/
-/*@Composable
-fun currentRoute(navController: NavHostController): String? {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    return navBackStackEntry?.destination?.route
-}*/
 @Composable
 private fun MainScreenNavigationConfigurations(
     navController: NavHostController
@@ -200,13 +202,8 @@ private fun MainScreenNavigationConfigurations(
         }
 
         composable(BottomNavigationScreens.Location.route) {
-            val viewModel: MapViewModel = hiltViewModel()
-            val permissionViewModel: PermissionViewModel = hiltViewModel()
-            val permissionsState = permissionViewModel.locationPermission.observeAsState()
 
-            PlacesScreen( viewModel )
-
-
+            MapScreen(locationRequestOnClick = {})
         }
         composable(BottomNavigationScreens.Scan.route) {
             ScanTab()

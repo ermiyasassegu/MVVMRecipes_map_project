@@ -36,7 +36,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     navController: NavHostController,
-    systemUiController: SystemUiController
+    systemUiController: SystemUiController,
 ) {
     SideEffect {
         systemUiController.setNavigationBarColor(color = OffWhite)
