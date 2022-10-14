@@ -4,9 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.platform.LocalContext
@@ -14,14 +17,30 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.CancellationTokenSource
+import com.mvvmrecipesmap_project.map.screens.home.viewmodel.MapViewModel
+import com.mvvmrecipesmap_project.map.screens.permission.viewmodel.PermissionViewModel
 import com.mvvmrecipesmap_project.presentation.navigation.MainScreen
 import com.mvvmrecipesmap_project.presentation.navigation.Navigation
 import com.mvvmrecipesmap_project.ui.theme.MVVMRecipesMap_projectTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+   /* private val permissionViewModel: PermissionViewModel by viewModels()
+    private val mapViewModel: MapViewModel by viewModels()
+
+    private val fusedLocationClient: FusedLocationProviderClient by lazy {
+        LocationServices.getFusedLocationProviderClient(applicationContext)
+    }
+
+    private var cancellationTokenSource = CancellationTokenSource()*/
+
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

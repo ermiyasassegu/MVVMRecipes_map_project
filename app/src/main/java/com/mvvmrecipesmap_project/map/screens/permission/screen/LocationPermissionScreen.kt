@@ -22,7 +22,7 @@ import com.mvvmrecipesmap_project.R
 import com.mvvmrecipesmap_project.map.util.openAppPermissionSettings
 import com.mvvmrecipesmap_project.map.util.openPermissionDialog
 
-
+@RequiresApi(Build.VERSION_CODES.M)
 @Composable
 fun LocationPermissionScreen(permissionViewModel: PermissionViewModel = hiltViewModel()) {
     Column(

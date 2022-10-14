@@ -5,6 +5,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+
 apply from: "local.gradle"
 
 android {
@@ -65,7 +66,7 @@ dependencies {
     implementation "androidx.compose.runtime:runtime:$compose_version"
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     implementation 'androidx.activity:activity-compose:1.6.0'
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0"
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
     implementation "androidx.compose.foundation:foundation:$compose_version"
     implementation "androidx.compose.foundation:foundation-layout:$compose_version"
     implementation "androidx.navigation:navigation-compose:2.4.2"
@@ -85,6 +86,7 @@ dependencies {
 
     //Accompanist
     implementation "com.google.accompanist:accompanist-pager:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-permissions:0.15.0"
 
     //System UI controller
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
@@ -108,6 +110,12 @@ dependencies {
 
     //Coil
     implementation "io.coil-kt:coil-compose:2.1.0"
+
+    // splash api
+    implementation "androidx.core:core-splashscreen:1.0.0-beta02"
+
+    // timber - log library
+    implementation 'com.jakewharton.timber:timber:5.0.1'
 
     // coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'

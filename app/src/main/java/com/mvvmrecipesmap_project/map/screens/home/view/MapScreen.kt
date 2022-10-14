@@ -31,6 +31,7 @@ import com.mvvmrecipesmap_project.map.model.response.Result
 import com.mvvmrecipesmap_project.map.ui.components.CategoryChip
 
 
+
 @Composable
 fun MapScreen(
     locationRequestOnClick: () -> Unit,
@@ -43,97 +44,102 @@ fun MapScreen(
     val selectedPlaceState = mapViewModel.selectedPlace.observeAsState()
     val currentLocation = mapViewModel.currentLocation.observeAsState()
 
-    LaunchedEffect(Unit) {
-        mapViewModel.getPlaces(mapViewModel.getDummyLocationRequest())
-        cameraPositionState.position = CameraPosition.fromLatLngZoom(
-            mapViewModel.getDummyEspooLocation(),
-            GOOGLE_MAPS_CAMERA_ZOOM
-        )
-    }
 
-    if (venuesListState.venueList?.isNotEmpty() == true) {
-        GoogleMap(
-            modifier = Modifier.fillMaxSize(),
-            cameraPositionState = cameraPositionState
-        ) {
-            venuesListState.venueList.forEach { place ->
-                place.geocodes?.main?.let { main ->
-                    Marker(
-                        state= MarkerState(position = LatLng(
-                            main.latitude!!,
-                            main.longitude!!)
-                        ),
-                        title = place.name,
-                        snippet = place.location?.address,
-                        onClick = {
-                            mapViewModel.setSelectedPlace(place)
-                            false
-                        }
+
+        LaunchedEffect(Unit) {
+            mapViewModel.getPlaces(mapViewModel.getDummyLocationRequest())
+            cameraPositionState.position = CameraPosition.fromLatLngZoom(
+                mapViewModel.getDummyEspooLocation(),
+                GOOGLE_MAPS_CAMERA_ZOOM
+            )
+        }
+
+        if (venuesListState.venueList?.isNotEmpty() == true) {
+            GoogleMap(
+                modifier = Modifier.fillMaxSize(),
+                cameraPositionState = cameraPositionState
+            ) {
+                venuesListState.venueList.forEach { place ->
+                    place.geocodes?.main?.let { main ->
+                        Marker(
+                            state = MarkerState(
+                                position = LatLng(
+                                    main.latitude!!,
+                                    main.longitude!!
+                                )
+                            ),
+                            title = place.name,
+                            snippet = place.location?.address,
+                            onClick = {
+                                mapViewModel.setSelectedPlace(place)
+                                false
+                            }
+                        )
+                    }
+                }
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = dimensionResource(id = R.dimen.home_screen_show_my_current_location_box_padding)),
+                contentAlignment = Alignment.BottomStart
+            ) {
+                Button(modifier = Modifier
+                    .wrapContentSize(),
+                    onClick = {
+                        showProgress.value = true
+                        locationRequestOnClick()
+                    }) {
+                    Icon(
+                        Icons.Default.Place,
+                        contentDescription = stringResource(id = R.string.home_screen_show_my_current_location_button_content_description)
                     )
+                    Text(text = stringResource(id = R.string.home_screen_show_my_current_location_button_text))
                 }
             }
         }
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = dimensionResource(id = R.dimen.home_screen_show_my_current_location_box_padding)),
-            contentAlignment = Alignment.BottomStart
-        ) {
-            Button(modifier = Modifier
-                .wrapContentSize(),
-                onClick = {
-                    showProgress.value = true
-                    locationRequestOnClick()
-                }) {
-                Icon(
-                    Icons.Default.Place,
-                    contentDescription = stringResource(id = R.string.home_screen_show_my_current_location_button_content_description)
-                )
-                Text(text = stringResource(id = R.string.home_screen_show_my_current_location_button_text))
-            }
-        }
-    }
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        if (venuesListState.isLoading) {
-            CircularProgressIndicator()
-        } else if (venuesListState.error != null) {
-            Text(
-                text = venuesListState.error,
-                color = MaterialTheme.colors.error
-            )
-        }
-    }
-
-    if (currentLocation.value != null) {
-        mapViewModel.getPlaces(currentLocation.value!!)
-        cameraPositionState.position = CameraPosition.fromLatLngZoom(
-            mapViewModel.getUserCurrentLocation(),
-            GOOGLE_MAPS_CAMERA_ZOOM
-        )
-        showProgress.value = false
-        mapViewModel.setCurrentLocationEmpty()
-    }
-
-    if (showProgress.value) {
-        Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            CircularProgressIndicator()
+            if (venuesListState.isLoading) {
+                CircularProgressIndicator()
+            } else if (venuesListState.error != null) {
+                Text(
+                    text = venuesListState.error,
+                    color = MaterialTheme.colors.error
+                )
+            }
+        }
+
+        if (currentLocation.value != null) {
+            mapViewModel.getPlaces(currentLocation.value!!)
+            cameraPositionState.position = CameraPosition.fromLatLngZoom(
+                mapViewModel.getUserCurrentLocation(),
+                GOOGLE_MAPS_CAMERA_ZOOM
+            )
+            showProgress.value = false
+            mapViewModel.setCurrentLocationEmpty()
+        }
+
+        if (showProgress.value) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+
+        if (selectedPlaceState.value != null) {
+            val place = selectedPlaceState.value
+            place?.let {
+                showInfo.value = true
+                SelectedPlaceInfo(showInfo, place)
+            }
         }
     }
 
-    if (selectedPlaceState.value != null) {
-        val place = selectedPlaceState.value
-        place?.let {
-            showInfo.value = true
-            SelectedPlaceInfo(showInfo, place)
-        }
-    }
-}
 
 @Composable
 fun SelectedPlaceInfo(showInfo: MutableState<Boolean>, place: Result) {
@@ -198,6 +204,7 @@ fun SelectedPlaceInfo(showInfo: MutableState<Boolean>, place: Result) {
         }
     }
 }
+
 
 @Composable
 fun SelectedPlaceNameField(name: String?) {

@@ -1,5 +1,9 @@
 package com.mvvmrecipesmap_project.presentation.navigation
 
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.os.Build
+
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -10,10 +14,12 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -24,9 +30,10 @@ import androidx.navigation.navArgument
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.mvvmrecipesmap_project.R
 import com.mvvmrecipesmap_project.map.screens.home.view.MapScreen
+import com.mvvmrecipesmap_project.map.screens.home.view.PlacesScreen
+import com.mvvmrecipesmap_project.map.screens.home.viewmodel.MapViewModel
 import com.mvvmrecipesmap_project.map.screens.permission.screen.LocationPermissionScreen
 import com.mvvmrecipesmap_project.map.screens.permission.viewmodel.PermissionViewModel
-import com.mvvmrecipesmap_project.map.ui.LocationTab
 import com.mvvmrecipesmap_project.navigation.screen.BottomNavigationScreens
 import com.mvvmrecipesmap_project.presentation.screens.home.HomeScreen
 import com.mvvmrecipesmap_project.presentation.screens.detail.DetailScreen
@@ -35,22 +42,9 @@ import com.mvvmrecipesmap_project.presentation.screens.splash.SplashScreen
 import com.mvvmrecipesmap_project.scanner.ScanTab
 import com.mvvmrecipesmap_project.util.Constants.ARGS_CATEGORY
 import com.mvvmrecipesmap_project.util.Constants.ARGS_MEAL_ID
+import timber.log.Timber
 
-@Composable
-fun barControl() {
-    // State of bottomBar, set state to false, if current page route is "car_details"
-    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
 
-    val navController = rememberNavController()
-    // Subscribe to navBackStackEntry, required to get current route
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-
-    when(navBackStackEntry?.destination?.route){
-        "splashScreen" ->{
-            bottomBarState.value = false
-        }
-    }
-}
 @Composable
 fun MainScreen() {
 
@@ -70,7 +64,7 @@ fun MainScreen() {
             bottomBarState.value = true
         }
         "location" ->{
-            bottomBarState.value = false
+            bottomBarState.value = true
         }
 
     }
@@ -174,7 +168,21 @@ fun RecipesBottomNavigation(
 }
 
 
+/*@Composable
+fun barControl() {
+    // State of bottomBar, set state to false, if current page route is "car_details"
+    val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
 
+    val navController = rememberNavController()
+    // Subscribe to navBackStackEntry, required to get current route
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+
+    when(navBackStackEntry?.destination?.route){
+        "splashScreen" ->{
+            bottomBarState.value = false
+        }
+    }
+}*/
 /*@Composable
 fun currentRoute(navController: NavHostController): String? {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -192,9 +200,12 @@ private fun MainScreenNavigationConfigurations(
         }
 
         composable(BottomNavigationScreens.Location.route) {
-                val viewmodel :PermissionViewModel = hiltViewModel()
-                MapScreen(
-                     locationRequestOnClick = {} )
+            val viewModel: MapViewModel = hiltViewModel()
+            val permissionViewModel: PermissionViewModel = hiltViewModel()
+            val permissionsState = permissionViewModel.locationPermission.observeAsState()
+
+            PlacesScreen( viewModel )
+
 
         }
         composable(BottomNavigationScreens.Scan.route) {
@@ -202,4 +213,5 @@ private fun MainScreenNavigationConfigurations(
         }
     }
 }
+
 

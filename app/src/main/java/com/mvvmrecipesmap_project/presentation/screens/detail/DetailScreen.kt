@@ -1,6 +1,8 @@
 package com.mvvmrecipesmap_project.presentation.screens.detail
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -8,14 +10,14 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -174,9 +176,38 @@ fun DetailScreen(
     }
 
 }
-
+private const val MINIMIZED_MAX_LINES = 4
 @Composable
 fun InstructionSection(mealDetail: MealDetail) {
+    var isExpanded by remember { mutableStateOf(false) }
+    val textLayoutResultState = remember { mutableStateOf<TextLayoutResult?>(null) }
+    var isClickable by remember { mutableStateOf(false) }
+    var finalText by remember { mutableStateOf(mealDetail.strInstructions) }
+
+    val textLayoutResult = textLayoutResultState.value
+
+    LaunchedEffect(textLayoutResult) {
+        if (textLayoutResult == null) return@LaunchedEffect
+
+        when {
+            isExpanded -> {
+                finalText = "${mealDetail.strInstructions} Show Less"
+            }
+            !isExpanded && textLayoutResult.hasVisualOverflow -> {
+                val lastCharIndex = textLayoutResult.getLineEnd(MINIMIZED_MAX_LINES - 1)
+                val showMoreString = "... Show More"
+                val adjustedText = mealDetail.strInstructions
+                    .substring(startIndex = 0, endIndex = lastCharIndex)
+                    .dropLast(showMoreString.length)
+                    .dropLastWhile { it == ' ' || it == '.' }
+
+                finalText = "$adjustedText$showMoreString"
+
+                isClickable = true
+            }
+        }
+    }
+
     Column(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
@@ -193,9 +224,16 @@ fun InstructionSection(mealDetail: MealDetail) {
         Text(
             text = mealDetail.strInstructions,
             style = MaterialTheme.typography.body1,
+            maxLines = if (isExpanded) Int.MAX_VALUE else MINIMIZED_MAX_LINES,
+            onTextLayout = { textLayoutResultState.value = it },
+            modifier = Modifier
+                .clickable(enabled = isClickable) { isExpanded = !isExpanded }
+                .animateContentSize(),
         )
     }
 }
+
+
 
 @Composable
 fun IngredientSection(ingredients: MutableList<String>) {
