@@ -8,22 +8,12 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.CancellationTokenSource
-import com.mvvmrecipesmap_project.map.screens.home.viewmodel.MapViewModel
-import com.mvvmrecipesmap_project.map.screens.permission.viewmodel.PermissionViewModel
-import com.mvvmrecipesmap_project.presentation.navigation.MainScreen
-import com.mvvmrecipesmap_project.presentation.navigation.Navigation
+import com.mvvmrecipesmap_project.navigation.MainScreen
 import com.mvvmrecipesmap_project.ui.theme.MVVMRecipesMap_projectTheme
 import dagger.hilt.android.AndroidEntryPoint
 

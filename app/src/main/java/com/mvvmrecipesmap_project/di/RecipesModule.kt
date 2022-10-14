@@ -10,10 +10,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.mvvmrecipesmap_project.data.remote.MealApi
-import com.mvvmrecipesmap_project.data.repository.MealRepositoryImpl
-import com.mvvmrecipesmap_project.domain.repository.MealsRepository
+import com.mvvmrecipesmap_project.recipes.data.remote.MealApi
+import com.mvvmrecipesmap_project.recipes.data.repository.MealRepositoryImpl
+import com.mvvmrecipesmap_project.recipes.domain.repository.MealsRepository
 import com.mvvmrecipesmap_project.util.Constants
 
 @Module

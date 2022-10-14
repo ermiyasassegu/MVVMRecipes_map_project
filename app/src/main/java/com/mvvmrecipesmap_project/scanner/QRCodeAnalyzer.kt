@@ -1,56 +1,56 @@
 package com.mvvmrecipesmap_project.scanner
 
+import android.annotation.SuppressLint
 import android.graphics.ImageFormat
+import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import com.google.zxing.*
-import com.google.zxing.common.HybridBinarizer
-import java.nio.ByteBuffer
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.common.Barcode
+import com.google.mlkit.vision.common.InputImage
+import java.util.concurrent.TimeUnit
 
-class QRCodeAnalyzer(
-    private val onQrCodeScanned: (result: String?) -> Unit
+
+class CodeAnalyzer(
+    private val onCodeScanned: (barcodes: List<Barcode>) -> Unit
 ) : ImageAnalysis.Analyzer {
 
-    companion object {
-        private val SUPPORTED_IMAGE_FORMATS = listOf(
-            ImageFormat.YUV_420_888,
-            ImageFormat.YUV_422_888,
-            ImageFormat.YUV_444_888)
-    }
+    private var lastAnalyzedTimeStamp = 0L
 
+    @SuppressLint("UnsafeOptInUsageError")
     override fun analyze(image: ImageProxy) {
-        if (image.format in SUPPORTED_IMAGE_FORMATS) {
-            val bytes = image.planes.first().buffer.toByteArray()
-            val source = PlanarYUVLuminanceSource(
-                bytes,
-                image.width,
-                image.height,
-                0,
-                0,
-                image.width,
-                image.height,
-                false
-            )
-            val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
-            try {
-                val result = MultiFormatReader().apply {
-                    setHints(
-                        mapOf(
-                            DecodeHintType.POSSIBLE_FORMATS to listOf(BarcodeFormat.QR_CODE)
-                        )
-                    )
-                }.decode(binaryBitmap)
-                onQrCodeScanned(result.text)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            } finally {
-                image.close()
+
+        val currentTimeStamp = System.currentTimeMillis()
+        if (currentTimeStamp - lastAnalyzedTimeStamp >= TimeUnit.SECONDS.toMillis(1)) {
+            image.image?.let { imageToAnalyze ->
+                val options = BarcodeScannerOptions.Builder()
+                    .setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS)
+                    .build()
+                val barcodeScanner = BarcodeScanning.getClient(options)
+                val imageToProcess =
+                    InputImage.fromMediaImage(imageToAnalyze, image.imageInfo.rotationDegrees)
+
+                barcodeScanner.process(imageToProcess)
+                    .addOnSuccessListener { barcodes ->
+                        if (barcodes.isNotEmpty()) {
+                            onCodeScanned(barcodes)
+                        } else {
+                            Log.d("TAG", "analyze: No barcode Scanned")
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.d("TAG", "BarcodeAnalyser: Something went wrong $exception")
+                    }
+                    .addOnCompleteListener {
+                        image.close()
+                    }
             }
+            lastAnalyzedTimeStamp = currentTimeStamp
+        } else {
+            image.close()
         }
     }
-
-    private fun ByteBuffer.toByteArray(): ByteArray {
-        rewind()
-        return ByteArray(remaining()).also { get(it) }
-    }
 }
+
+

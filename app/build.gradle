@@ -71,7 +71,7 @@ dependencies {
     implementation "androidx.compose.foundation:foundation-layout:$compose_version"
     implementation "androidx.navigation:navigation-compose:2.4.2"
     implementation "androidx.navigation:navigation-common-ktx:2.4.2"
-
+    implementation 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0'
 
 
     testImplementation 'junit:junit:4.13.2'
@@ -87,6 +87,9 @@ dependencies {
     //Accompanist
     implementation "com.google.accompanist:accompanist-pager:$accompanist_version"
     implementation "com.google.accompanist:accompanist-permissions:0.15.0"
+
+    //Barcode
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
 
     //System UI controller
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
@@ -121,10 +124,12 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
 
-    // camera x
-    implementation "androidx.camera:camera-camera2:1.1.0-beta02"
-    implementation "androidx.camera:camera-lifecycle:1.1.0-beta02"
-    implementation "androidx.camera:camera-view:1.1.0-beta02"
+    // CameraX
+    def   camera_version = '1.2.0-beta01'
+    implementation "androidx.camera:camera-core:$camera_version"
+    implementation "androidx.camera:camera-camera2:$camera_version"
+    implementation "androidx.camera:camera-lifecycle:$camera_version"
+    implementation "androidx.camera:camera-view:$camera_version"
 
     // zxing
     implementation 'com.google.zxing:core:3.3.3'
