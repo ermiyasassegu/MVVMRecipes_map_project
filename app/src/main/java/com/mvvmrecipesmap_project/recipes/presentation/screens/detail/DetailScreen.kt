@@ -57,7 +57,7 @@ fun DetailScreen(
         ) {
             detailScreenState.mealDetail?.let { mealDetail ->
                 val ingredients = viewModel.extractIngredientsFromDetails(mealDetail)
-
+                Spacer(modifier = Modifier.width(10.dp))
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize(),
