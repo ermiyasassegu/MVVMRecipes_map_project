@@ -47,3 +47,6 @@ Class Library, but type inference allows its syntax to be more concise
      with Android Jetpack and other Android libraries. KTX extensions provide
      concise, idiomatic Kotlin to Jetpack, Android platform, and other APIs.
    - AndroidX - Major improvement to the original Android Support Library, which is no longer maintained.
+- [Retrofit]https://github.com/square/retrofit()- is a type-safe REST client for Android, 
+      Java and Kotlin, built as a powerful framework for consuming APIs
+- [Dagger-Hilt](https://dagger.dev/hilt/) - a dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project
