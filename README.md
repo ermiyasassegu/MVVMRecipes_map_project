@@ -37,8 +37,7 @@ Kotlin is designed to interoperate fully with Java, and the
 JVM version of Kotlin's standard library depends on the Java 
 Class Library, but type inference allows its syntax to be more concise
 - [Jetepack Components:](https://developer.android.com/topic/architecture?gclid=Cj0KCQjw8O-VBhCpARIsACMvVLOH1satX45o9f4PMQ4Sxr7bG9myl6-KZL9nYda8PJsHV7m2uJL8bzgaAmqiEALw_wcB&gclsrc=aw.ds)
-   - [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=Cj0KCQjwhqaVBhCxARIsAHK1tiMMwHsxQ8Z25jyEdtLha9erq11wROoEfL6RqpGMprgbDTNuMO3_Ri8aAu5EEALw_wcB&gclsrc=aw.ds) - Android’s modern toolkit for building native UI.
-      It simplifies and accelerates UI development on Android
+   - [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=Cj0KCQjwhqaVBhCxARIsAHK1tiMMwHsxQ8Z25jyEdtLha9erq11wROoEfL6RqpGMprgbDTNuMO3_Ri8aAu5EEALw_wcB&gclsrc=aw.ds) - Android’s modern toolkit for building native UI. It simplifies and accelerates UI development on Android
    - [View Model](https://developer.android.com/topic/libraries/architecture/viewmodel)- store and manage UI-related data in a lifecycle conscious way.
    - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) - Perform actions in response to a change in the lifecycle status
       of another component, such as activities and fragments.
@@ -57,8 +56,11 @@ Class Library, but type inference allows its syntax to be more concise
   code that executes asynchronously
 
 - [Flow](https://developer.android.com/kotlin/flow)- In coroutines, a flow is a type that
--  can emit multiple values sequentially, as opposed to suspend functions that return only a single value.
+    can emit multiple values sequentially, as opposed to suspend functions that return only a single value.
+- [Accompanist](https://github.com/google/accompanist)   
+- [Navigation](https://developer.android.com/guide/navigation)
   
 # Data Source
-This application fetches its data from the The [Meal Db](https://www.themealdb.com/api.php). 
+The Recipes application fetches its data from the The [Meal Db](https://www.themealdb.com/api.php). 
 'Find the Documentation by following this [link](https://www.themealdb.com/api.php).
+
