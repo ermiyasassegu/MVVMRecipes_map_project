@@ -66,5 +66,8 @@ Class Library, but type inference allows its syntax to be more concise
 - [FourSquare Places API](https://developer.foursquare.com/docs/places-api-getting-started)
 - [Google Maps with Jetpack Compose](https://developers.google.com/maps/documentation/android-sdk/maps-compose)
 ## How to get the Foursquare API key?
-Register [here](https://developer.foursquare.com/docs/manage-api-keys) and get your own Foursquare API key for your builds. You should add your API key to **local.gradle**.
-
+Register [here](https://developer.foursquare.com/docs/manage-api-keys) and 
+get your own Foursquare API key for your builds. You should add your API key to **local.gradle**.
+## How to get the Google MAPS API key?
+Register [here]([https://developer.foursquare.com/docs/manage-api-keys](https://developers.google.com/maps/documentation/android-sdk/maps-compose)) and 
+get your own Google Maps API key for your builds. You should add your API key to as a meta-data under the AndroidManifest.xml file.
