@@ -1,6 +1,7 @@
 # MVVMRecipes_map
-
-A food Recipes App with Nearby Restaurants Built with Jetpack Compose. The app uses API that follows the MVVM Clean Architectural pattern.
+An android  project with Jetpack Compose, Coroutines, ViewModel, LiveData, Retrofit, Hilt and based on MVVM by using Recipe APi, Foursquare Places API and Google Maps Compose.
+# Introduction
+It is about a demonstration application with a food recipes fetch the data from mealdb API and get the nearby restaurant places from Foursquare Places API. The Recipes has different catagories which consists of different meals and when it clicks goes to the detail screen. It get places(venues) information from Foursquare Places API service, then shows them on Google Maps. 
 
 # Screenshots
 
