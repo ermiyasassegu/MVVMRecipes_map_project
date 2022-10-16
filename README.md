@@ -70,4 +70,4 @@ Register [here](https://developer.foursquare.com/docs/manage-api-keys) and
 get your own Foursquare API key for your builds. You should add your API key to **local.gradle**.
 ## How to get the Google MAPS API key?
 Register [here](https://developers.google.com/maps/documentation/android-sdk/maps-compose) and 
-get your own Google Maps API key for your builds. You should add your API key to as a meta-data under the AndroidManifest.xml file.
+get your own Google Maps API key for your builds. You should add your API key to as a meta-data under the **AndroidManifest.xml file.
