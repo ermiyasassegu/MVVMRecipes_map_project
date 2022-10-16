@@ -62,6 +62,9 @@ Class Library, but type inference allows its syntax to be more concise
 - [Navigation](https://developer.android.com/guide/navigation)
   
 # Data Source
-The Recipes application fetches its data from the The [Meal Db](https://www.themealdb.com/api.php). 
-'Find the Documentation by following this [link](https://www.themealdb.com/api.php).
+- [The Recipes API](https://www.themealdb.com/api.php) 
+- [FourSquare Places API](https://developer.foursquare.com/docs/places-api-getting-started)
+- [Google Maps with Jetpack Compose](https://developers.google.com/maps/documentation/android-sdk/maps-compose)
+
+The location location api get its places information from just create your own Api Key here and add it into build.gradle.kts file
 
