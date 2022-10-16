@@ -61,10 +61,10 @@ Class Library, but type inference allows its syntax to be more concise
 - [Accompanist](https://github.com/google/accompanist)   
 - [Navigation](https://developer.android.com/guide/navigation)
   
-# Data Source
+## Data Source
 - [The Recipes API](https://www.themealdb.com/api.php) 
 - [FourSquare Places API](https://developer.foursquare.com/docs/places-api-getting-started)
 - [Google Maps with Jetpack Compose](https://developers.google.com/maps/documentation/android-sdk/maps-compose)
-
-The location location api get its places information from just create your own Api Key here and add it into build.gradle.kts file
+## How to get the Foursquare API key?
+Register [here](https://developer.foursquare.com/docs/manage-api-keys) and get your own Foursquare API key for your builds. You should add your API key to **local.gradle**.
 
