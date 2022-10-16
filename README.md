@@ -37,16 +37,16 @@ Kotlin is designed to interoperate fully with Java, and the
 JVM version of Kotlin's standard library depends on the Java 
 Class Library, but type inference allows its syntax to be more concise
 - [Jetepack Components:](https://developer.android.com/topic/architecture?gclid=Cj0KCQjw8O-VBhCpARIsACMvVLOH1satX45o9f4PMQ4Sxr7bG9myl6-KZL9nYda8PJsHV7m2uJL8bzgaAmqiEALw_wcB&gclsrc=aw.ds)
-   - Jetpack Compose - Android’s modern toolkit for building native UI.
+   - [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=Cj0KCQjwhqaVBhCxARIsAHK1tiMMwHsxQ8Z25jyEdtLha9erq11wROoEfL6RqpGMprgbDTNuMO3_Ri8aAu5EEALw_wcB&gclsrc=aw.ds) - Android’s modern toolkit for building native UI.
       It simplifies and accelerates UI development on Android
-   - View Model- store and manage UI-related data in a lifecycle conscious way.
-   - Lifecycle - Perform actions in response to a change in the lifecycle status
+   - [View Model](https://developer.android.com/topic/libraries/architecture/viewmodel)- store and manage UI-related data in a lifecycle conscious way.
+   - [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle) - Perform actions in response to a change in the lifecycle status
       of another component, such as activities and fragments.
-   - LiveData - A lifecycle-aware data holder with the observer pattern
-   - Android KTX - Android KTX is a set of Kotlin extensions that are included
+   - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata.html) - A lifecycle-aware data holder with the observer pattern
+   - [Android KTX](https://developer.android.com/kotlin/ktx.html) - Android KTX is a set of Kotlin extensions that are included
      with Android Jetpack and other Android libraries. KTX extensions provide
      concise, idiomatic Kotlin to Jetpack, Android platform, and other APIs.
-   - AndroidX - Major improvement to the original Android Support Library, which is no longer maintained.
+   - [AndroidX](https://developer.android.com/jetpack/androidx) - Major improvement to the original Android Support Library, which is no longer maintained.
 - [Retrofit](https://github.com/square/retrofit)- is a type-safe REST client for Android, 
       Java and Kotlin, built as a powerful framework for consuming APIs
 - [Dagger-Hilt](https://dagger.dev/hilt/) - a dependency injection library for Android 
