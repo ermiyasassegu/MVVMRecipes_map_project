@@ -37,3 +37,13 @@ Kotlin is designed to interoperate fully with Java, and the
 JVM version of Kotlin's standard library depends on the Java 
 Class Library, but type inference allows its syntax to be more concise
 - [Jetepack Components:](https://developer.android.com/topic/architecture?gclid=Cj0KCQjw8O-VBhCpARIsACMvVLOH1satX45o9f4PMQ4Sxr7bG9myl6-KZL9nYda8PJsHV7m2uJL8bzgaAmqiEALw_wcB&gclsrc=aw.ds)
+   - Jetpack Compose - Android’s modern toolkit for building native UI.
+      It simplifies and accelerates UI development on Android
+   - View Model- store and manage UI-related data in a lifecycle conscious way.
+   - Lifecycle - Perform actions in response to a change in the lifecycle status
+      of another component, such as activities and fragments.
+   - LiveData - A lifecycle-aware data holder with the observer pattern
+   - Android KTX - Android KTX is a set of Kotlin extensions that are included
+     with Android Jetpack and other Android libraries. KTX extensions provide
+     concise, idiomatic Kotlin to Jetpack, Android platform, and other APIs.
+   - AndroidX - Major improvement to the original Android Support Library, which is no longer maintained.
