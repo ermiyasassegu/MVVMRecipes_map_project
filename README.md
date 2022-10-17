@@ -66,3 +66,13 @@ Register [here](https://developers.google.com/maps/documentation/android-sdk/map
 get your own Google Maps API key for your builds. You should add your API key to as a meta-data under the **AndroidManifest.xml** file.
 ## Light-Sensor
 The app that displays light sensor data. It displays if the device is in dark or light room. It is possible to configure the lux level to choose the what level of brightness is considered as dark or light.
+## Functionality TODO
+- Implement search feature
+- Room for local caching to facilitate offline support 
+- Light sensor applied only in homepage and apply for other pages
+## References:
+1. [Jetpack Compose MVVM for Beginners](https://codingwithmitch.com/courses/jetpack-compose-mvvm-for-beginners/)
+2. [Dependency Injection with Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
+3. [Material UI color System](https://material.io/design/color/the-color-system.html)
+4. [Recipes App in Jetpack compose](https://github.com/Elbehiry/Delish)
+
