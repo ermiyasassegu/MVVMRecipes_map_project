@@ -1,48 +1,89 @@
 package com.mvvmrecipesmap_project
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.pm.ActivityInfo
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.material.*
+import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.*
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.mvvmrecipesmap_project.category.CategoryScreen
-import com.mvvmrecipesmap_project.map.MapScreen
-import com.mvvmrecipesmap_project.recipes.RecipesScreen
-import com.mvvmrecipesmap_project.navigation.screen.BottomNavigationScreens
-import com.mvvmrecipesmap_project.navigation.screen.FavouritesTab
-import com.mvvmrecipesmap_project.map.ui.LocationTab
-import com.mvvmrecipesmap_project.scanner.ScanTab
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.CancellationTokenSource
+import com.mvvmrecipesmap_project.map.screens.home.viewmodel.MapViewModel
+import com.mvvmrecipesmap_project.map.screens.permission.viewmodel.PermissionViewModel
+import com.mvvmrecipesmap_project.presentation.navigation.MainScreen
+import com.mvvmrecipesmap_project.presentation.navigation.Navigation
 import com.mvvmrecipesmap_project.ui.theme.MVVMRecipesMap_projectTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+   /* private val permissionViewModel: PermissionViewModel by viewModels()
+    private val mapViewModel: MapViewModel by viewModels()
+
+    private val fusedLocationClient: FusedLocationProviderClient by lazy {
+        LocationServices.getFusedLocationProviderClient(applicationContext)
+    }
+
+    private var cancellationTokenSource = CancellationTokenSource()*/
+
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MVVMRecipesMap_projectTheme {
                 //RecipesApp()
+                WindowCompat.setDecorFitsSystemWindows(window, false)
                 MainScreen()
+                LockScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
             }
         }
     }
 }
+
 @Composable
+fun LockScreenOrientation(orientation: Int) {
+    val context = LocalContext.current
+    DisposableEffect(Unit) {
+        val activity = context.findActivity() ?: return@DisposableEffect onDispose {}
+        val originalOrientation = activity.requestedOrientation
+        activity.requestedOrientation = orientation
+        onDispose {
+            // restore original orientation when view disappears
+            activity.requestedOrientation = originalOrientation
+        }
+    }
+}
+
+fun Context.findActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.findActivity()
+    else -> null
+}
+
+/*@Preview(showBackground = true)
+@Composable
+fun DefaultPreview(navController: NavController) {
+    MVVMRecipesMap_projectTheme {
+        Navigation(navController )
+    }
+}*/
+
+/*@Composable
 fun MainScreen() {
     val navController = rememberNavController()
     val bottomNavigationItems = listOf(
@@ -133,7 +174,7 @@ fun MainScreenNavigationConfigurations(
             ScanTab()
         }
     }
-}
+}*/
 /*
 @Composable
 fun RecipesApp() {

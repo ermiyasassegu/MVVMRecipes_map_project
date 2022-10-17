@@ -1,28 +1,17 @@
 package com.mvvmrecipesmap_project.map.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.MapUiSettings
-import com.google.maps.android.compose.Marker
-import android.location.Location
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.android.gms.location.*
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.maps.android.compose.*
-import com.mvvmrecipesmap_project.R
-import com.mvvmrecipesmap_project.map.LocationUtils
 
 @Composable
 fun LocationTab() {
