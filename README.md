@@ -18,9 +18,6 @@ It is about a demonstration application with a food recipes fetch the data from 
 
 
 
-
-
-
 # Architecture
    -   MVVM Architecture (Declarative View - ViewModel - Model) clean architecture
    -  Repository pattern
@@ -67,6 +64,7 @@ get your own Google Maps API key for your builds. You should add your API key to
 ## Light-Sensor
 The app that displays light sensor data. It displays if the device is in dark or light room. It is possible to configure the lux level to choose the what level of brightness is considered as dark or light.
 ## Functionality TODO
+### TODO
 - Implement search feature
 - Room for local caching to facilitate offline support 
 - Light sensor applied only in homepage and apply for other pages
