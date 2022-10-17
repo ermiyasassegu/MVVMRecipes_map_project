@@ -7,6 +7,9 @@ It is about a demonstration application with a food recipes fetch the data from 
 
 ![Splash](https://user-images.githubusercontent.com/67770426/196130031-827595f3-3fa4-4b52-89f1-429a0f38a966.png)
 ![Home](https://user-images.githubusercontent.com/67770426/196129923-0ab9f543-7c4a-433a-b148-4e5606d039d3.png)
+![viewmore](https://user-images.githubusercontent.com/67770426/196131249-3e2f9afd-9749-4be3-92e8-9cc5978d0346.png)
+![Detail](https://user-images.githubusercontent.com/67770426/196131334-f3a65155-7bae-4ff8-b212-c43d84d4f5fc.png)
+![DetailMore](https://user-images.githubusercontent.com/67770426/196131374-50c0df68-af5c-4524-bbfd-437618923dfa.png)
 ![map](https://user-images.githubusercontent.com/67770426/196129984-1c288e46-8e45-4118-be11-3dd8ea2bed5d.png)
 ![locationName](https://user-images.githubusercontent.com/67770426/196130195-974c1f18-9048-4586-8d52-13f875d9e946.png)
 ![Scanner](https://user-images.githubusercontent.com/67770426/196130220-c2ff6911-41f2-4b58-8997-1a0ca89eb58f.png)
