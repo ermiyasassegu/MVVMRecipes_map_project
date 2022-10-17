@@ -74,5 +74,6 @@ The app that displays light sensor data. It displays if the device is in dark or
 1. [Jetpack Compose MVVM for Beginners](https://codingwithmitch.com/courses/jetpack-compose-mvvm-for-beginners/)
 2. [Dependency Injection with Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 3. [Material UI color System](https://material.io/design/color/the-color-system.html)
-4. [Recipes App in Jetpack compose](https://github.com/Elbehiry/Delish)
+4. [Jetpack compose](https://developer.android.com/jetpack/compose)
+5. [Map compose](https://developers.google.com/maps/documentation/android-sdk/maps-compose)
 
