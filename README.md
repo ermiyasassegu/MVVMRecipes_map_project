@@ -5,7 +5,8 @@ It is about a demonstration application with a food recipes fetch the data from 
 
 # Screenshots
 
-![Splash](https://user-images.githubusercontent.com/67770426/196130031-827595f3-3fa4-4b52-89f1-429a0f38a966.png =100x100)
+
+<img src="[https://your-image-url.type](https://user-images.githubusercontent.com/67770426/196130031-827595f3-3fa4-4b52-89f1-429a0f38a966.png)" width="100" height="100">
 ![Home](https://user-images.githubusercontent.com/67770426/196129923-0ab9f543-7c4a-433a-b148-4e5606d039d3.png)
 ![viewmore](https://user-images.githubusercontent.com/67770426/196131249-3e2f9afd-9749-4be3-92e8-9cc5978d0346.png)
 ![Detail](https://user-images.githubusercontent.com/67770426/196131334-f3a65155-7bae-4ff8-b212-c43d84d4f5fc.png)
