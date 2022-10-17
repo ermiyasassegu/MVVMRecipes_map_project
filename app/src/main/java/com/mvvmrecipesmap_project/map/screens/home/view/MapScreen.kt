@@ -3,6 +3,7 @@ package com.mvvmrecipesmap_project.map.screens.home.view
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.*
@@ -13,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
@@ -29,7 +31,7 @@ import com.mvvmrecipesmap_project.R
 import com.mvvmrecipesmap_project.map.model.response.Category
 import com.mvvmrecipesmap_project.map.model.response.Result
 import com.mvvmrecipesmap_project.map.ui.components.CategoryChip
-
+import com.mvvmrecipesmap_project.sensor.presentation.viewmodel.SensorViewModel
 
 
 @Composable
@@ -43,7 +45,7 @@ fun MapScreen(
     val venuesListState = mapViewModel.venuesListState
     val selectedPlaceState = mapViewModel.selectedPlace.observeAsState()
     val currentLocation = mapViewModel.currentLocation.observeAsState()
-
+    val   sensorviewmodel: SensorViewModel = hiltViewModel()
 
 
         LaunchedEffect(Unit) {
@@ -98,6 +100,7 @@ fun MapScreen(
                 }
             }
         }
+
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
@@ -124,7 +127,7 @@ fun MapScreen(
 
         if (showProgress.value) {
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize() ,
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()

@@ -89,7 +89,7 @@ class MapViewModel @Inject constructor(private val getPlaces: GetPlaces) :
     }
 
     /**
-     * Get dummy data for Karamalmi Espoo location
+     * Get dummy data for  Espoo location
      * return LatLng
      */
     fun getDummyEspooLocation(): LatLng {
@@ -97,7 +97,7 @@ class MapViewModel @Inject constructor(private val getPlaces: GetPlaces) :
     }
 
     /**
-     * Get dummy data for Karamalmi Espoo location
+     * Get dummy data for  Espoo location
      * return LocationRequestModel
      */
     fun getDummyLocationRequest(): LocationRequestModel {

@@ -1,9 +1,5 @@
 package com.mvvmrecipesmap_project.presentation.navigation
 
-import android.Manifest.permission.ACCESS_FINE_LOCATION
-import android.os.Build
-
-import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -11,21 +7,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -36,20 +27,15 @@ import androidx.navigation.navArgument
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.mvvmrecipesmap_project.R
 import com.mvvmrecipesmap_project.map.screens.home.view.MapScreen
-import com.mvvmrecipesmap_project.map.screens.home.view.PlacesScreen
-import com.mvvmrecipesmap_project.map.screens.home.viewmodel.MapViewModel
-import com.mvvmrecipesmap_project.map.screens.permission.screen.LocationPermissionScreen
-import com.mvvmrecipesmap_project.map.screens.permission.viewmodel.PermissionViewModel
-import com.mvvmrecipesmap_project.navigation.screen.BottomNavigationScreens
-import com.mvvmrecipesmap_project.presentation.screens.home.HomeScreen
-import com.mvvmrecipesmap_project.presentation.screens.detail.DetailScreen
-import com.mvvmrecipesmap_project.presentation.screens.home.ViewMoreScreen
-import com.mvvmrecipesmap_project.presentation.screens.splash.SplashScreen
+import com.mvvmrecipesmap_project.bottomnavigation.screen.BottomNavigationScreens
+import com.mvvmrecipesmap_project.recipes.screens.Screens
+import com.mvvmrecipesmap_project.recipes.screens.home.HomeScreen
+import com.mvvmrecipesmap_project.recipes.screens.detail.DetailScreen
+import com.mvvmrecipesmap_project.recipes.screens.home.ViewMoreScreen
+import com.mvvmrecipesmap_project.recipes.screens.splash.SplashScreen
 import com.mvvmrecipesmap_project.scanner.ScanTab
 import com.mvvmrecipesmap_project.util.Constants.ARGS_CATEGORY
 import com.mvvmrecipesmap_project.util.Constants.ARGS_MEAL_ID
-import timber.log.Timber
-import kotlin.math.roundToInt
 
 
 @Composable
@@ -103,7 +89,7 @@ fun MainScreen() {
 }
 
 @Composable
-fun Navigation() {
+fun Navigation( ) {
     val navController = rememberNavController()
     val systemUiController = rememberSystemUiController()
     val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
@@ -203,7 +189,8 @@ private fun MainScreenNavigationConfigurations(
 
         composable(BottomNavigationScreens.Location.route) {
 
-            MapScreen(locationRequestOnClick = {})
+                MapScreen(locationRequestOnClick = {})
+
         }
         composable(BottomNavigationScreens.Scan.route) {
             ScanTab()
